@@ -13,6 +13,8 @@ public class Ex25AnonymousMain {
 		Ex25Saram saram2 = person.getSaram();
 		System.out.println(saram2.getIr());
 
+		
+		System.out.println("hotfil작업공간에서 적음");
 	}
 
 }
