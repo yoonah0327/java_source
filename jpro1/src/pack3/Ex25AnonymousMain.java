@@ -15,6 +15,8 @@ public class Ex25AnonymousMain {
 
 		
 		System.out.println("hotfil작업공간에서 적음");
+		
+		System.out.println("main 작업공간에서 cnrk");
 	}
 
 }
