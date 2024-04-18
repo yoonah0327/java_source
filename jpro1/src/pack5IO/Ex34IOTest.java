@@ -12,7 +12,7 @@ public class Ex34IOTest {
 	// Console과 file을 통한 입력
 	public static void main(String[] args) throws Exception {
 		// 1. Console을 통한 입력
-	InputStreamReader in =new InputStreamReader(System.in);
+//	InputStreamReader in =new InputStreamReader(System.in);
 //		BufferedReader br = new BufferedReader(in);
 //		System.out.println("이름은");
 //		String ir = br.readLine();
@@ -31,6 +31,7 @@ public class Ex34IOTest {
 //	Scanner.close();
 
 		// 파일읽기
+ // 메모장에 저장된 내용읽어 출력하기
 		// File f = new File("c:/work/good.txt"); 이게 기본모양
 		File f = new File("c:\\work\\good.txt"); // 윈도우에선 백슬래시두개로.
 		// 문자단위
@@ -45,7 +46,7 @@ public class Ex34IOTest {
 		}
 		br.close(); // Garbage collector(GC)로 하여금 점유 메모리 해제 요청
 		fr.close();
-
+// 데이터를 받아 읽어 출력하기
 		System.out.println();
 		File file = new File("c:/work/전국도서관표준데이터.csv");
 		FileReader fr2 = new FileReader(file);

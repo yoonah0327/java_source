@@ -1,5 +1,5 @@
 package pack6thread;
-
+// 스레드로 시계창띄우기..
 import java.awt.Button;
 import java.awt.Font;
 import java.awt.Frame;
