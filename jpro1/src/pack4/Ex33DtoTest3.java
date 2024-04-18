@@ -6,21 +6,21 @@ import java.util.StringTokenizer;
 public class Ex33DtoTest3 {
 	private ArrayList<Ex33compDto> dtoto = new ArrayList<Ex33compDto>();
 
-	public void inputData(String datas) {
-		for(int i=0; i< dtoto.length; i++) {
-			StringTokenizer to= new StringTokenizer(dtoto[i], ",");
-			String irum = to.nextToken();
-			int sabun = Integer.parseInt(to.nextToken());
-			int gibon = Integer.parseInt(to.nextToken());
-			int ibsa = Integer.parseInt(to.nextToken());
-			
-			Ex33compDto dd = new Ex33compDto();
-			dd.setIrum(irum);
-			dd.setSabun(sabun);
-			dd.setGibon(gibon);
-			dd.setIbsa(ibsa);
-			dtoto.add(dd);
-		}
+	public void inputData(String datas) { // 에러안뜨게하기위해 주석처리해둠
+//		for(int i=0; i< dtoto.length; i++) {
+//			StringTokenizer to= new StringTokenizer(dtoto[i], ",");
+//			String irum = to.nextToken();
+//			int sabun = Integer.parseInt(to.nextToken());
+//			int gibon = Integer.parseInt(to.nextToken());
+//			int ibsa = Integer.parseInt(to.nextToken());
+//			
+//			Ex33compDto dd = new Ex33compDto();
+//			dd.setIrum(irum);
+//			dd.setSabun(sabun);
+//			dd.setGibon(gibon);
+//			dd.setIbsa(ibsa);
+//			dtoto.add(dd);
+//		}
 	}
 	
 	public void displaydata() {
