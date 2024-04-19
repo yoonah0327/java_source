@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import java.util.*;
-// 카페 내에 있는 소스 복붙해서 한번 보려고 해봄.
+// 카페 내에 있는 소스 복붙해서 한번 보려고 해봄.예쁘게 시계 띄우기
 public class Ex40ThreadWatch extends Frame implements Runnable {
 
 	private Boolean b = false;

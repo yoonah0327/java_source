@@ -1,6 +1,6 @@
 package pack6thread;
 
-public class Ex38Thread2 implements Runnable {
+public class Ex38Thread2 implements Runnable {// runnable로 임플리먼트. 다중상속의 효과가있기에 ./////////////////////
 
 	public Ex38Thread2() {
 		// TODO Auto-generated constructor stub

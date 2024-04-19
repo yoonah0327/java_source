@@ -1,6 +1,6 @@
 package pack6thread;
 //java.lang안에 있는 애들은 임포트생략임. Thread, syso 등.
-public class Ex37Thread1 extends Thread{
+public class Ex37Thread1 extends Thread{ //스레드를 상속받음 ////////////////////////////////
 	public Ex37Thread1() { //기본생성자
 		// TODO Auto-generated constructor stub
 	}
