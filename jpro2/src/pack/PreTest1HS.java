@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-public class Dbtest7HS extends JFrame implements ActionListener{
+public class PreTest1HS extends JFrame implements ActionListener{
 	JTextField txtCode, txtPum, txtSu, txtDan;
 	int code, su, dan, total;
 	JButton btnAdd = new JButton("추가");
@@ -31,7 +31,7 @@ public class Dbtest7HS extends JFrame implements ActionListener{
 	String sql = "";
 	int cnt = 0;
 	
-	public Dbtest7HS() {
+	public PreTest1HS() {
 		super("상품 처리");
 		layInit();
 		accDb();
@@ -96,7 +96,7 @@ public class Dbtest7HS extends JFrame implements ActionListener{
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent e) {info
+	public void actionPerformed(ActionEvent e) {
 		// 데이터 모두 입력했는지 검사
 		if(txtCode.getText().equals("")) {
 			txtResult.setText("코드 미입력");
@@ -162,7 +162,7 @@ public class Dbtest7HS extends JFrame implements ActionListener{
 	}
 
 	public static void main(String[] args) {
-		new Dbtest7HS();
+		new PreTest1HS();
 	}
 
 }
