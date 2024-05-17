@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>함수정리</title>
+</head>
+<body>
+<h2> * 함수 작성 정리 * </h2>
+<script type="text/javascript">
+function func1(){
+	document.write(`난 func1이라고 해`);
+}
+func1(); // 난 func1이라고 해
+document.write(`<br>`);
+let my = func1; // 복사(함수의 주소 치환)
+my(); //난 func1이라고 해
+
+function func2(a,b = 20){ //매개변수에 초기치
+	let c = a+b;
+	return c;
+}
+let re= func2(1,2);
+document.write(`<br>re: ${re}`); //re: 3
+re= func2("팀장", "만세");
+document.write(`<br>re: ${re}`); //re: 팀장만세
+re=func2(5);
+document.write(`<br>re: ${re}`); //re: 25 //b값을 안줬다. b는 초기치20을 인식했다. 
+
+//prototype지원: arguments객체는 함수에 전달된 인수에 해당되는 Array형태의 객체
+function func3(){
+	document.write(`<hr>arguments 갯수: ${arguments.length}`);
+	document.write(`<br>arguments 값: ${arguments[0]} ${arguments[1]}`);
+}
+func3();
+func3(3,4);
+func3(3,4,5);
+func3(1,"으뜸");
+/*
+ arguments 갯수: 0
+ arguments 값: undefined undefined
+ arguments 갯수: 2
+ arguments 값: 3 4
+ arguments 갯수: 3
+ arguments 값: 3 4
+ arguments 갯수: 2
+ arguments 값: 1 으뜸
+ */
+
+function hap(){
+	let tot=0;
+	for(let i=0; i<arguments.length; i++){
+		tot+= arguments[i];
+	}
+	return tot;
+}
+document.write(`<br>${hap(1,2,3)}`); //6
+document.write(`<br>${hap(1,2,3,4)}`); //10
+document.write(`<br>${hap("안녕", "까치야~")}`); //0안녕까치야~ //누적이라 0찍힘. 
+
+document.write(`<hr>익명함수----<br>`);
+(function(){
+	document.write(`함수명이 없는 1회용함수`);
+})(); //초기화 작업시에 효과적으로 선언할수 있다. ();이게 일회용함수형태. //함수명이 없는 1회용함수
+
+document.write(`<hr>함수 표현식----<br>`);
+// 익명함수를 변수에 치환
+const test= function(n1,n2){
+	document.write(`<br>두 수의 합은 ${n1+n2}`);
+};
+
+test(5,6); //두 수의 합은 11
+let test2= test;
+test2(5,6); //두 수의 합은 11
+</script>
+<p>
+<div style= "background-color: bisque;">선언적 함수와 함수 표현식의 차이</div>
+<script type="text/javascript">
+func4(); //호이스팅 : 인터프리터가 변수(var로 선언된)와 함수의 메모리 공간을 실행전에 미리 할당하는것.
+function func4(){ // 선언적함수
+	document.write(`<br>선언적 함수 실행(메모리에 계속 존재)`);
+}
+func4(); 
+// --- 선언적함수 vs 함수표현식---
+//myFunc(); //err 단발성이기에 호이스팅이 안된다. 
+let myFunc = function(){
+	document.write(`<br>함수 표현식: 익명 함수 실행(휘발성, 동적)`);
+	//함수 표현식은 실제 실행 흐름이 해당함수에 도달했을때 함수를 생성한다. (동적으로 메모리 확보. 메모리절감효과)
+}
+
+myFunc();
+
+document.write(`<hr>중첩 함수(내부함수)---`);
+function func5(){
+	function fu1(){
+		document.write(`<br>fu1 수행`);
+	}
+	function fu2(){
+		document.write(`<br>fu2 처리`);
+	}
+	fu1();
+	fu2();
+}
+//fu1(); //err// fu1, fu2는 종속되어있어 직접 부를수없다. 
+func5();
+
+function abc(a,b){ //중첩함수
+	function def(x){
+		return x*x;
+	}
+	return Math.sqrt(def(a)+def(b)); // Math.sqrt제곱근함수(25)
+}
+document.write(`<br>${abc(3,4)}`);//5
+
+document.write(`<hr>익명 함수 반환`);
+function outer1(){
+	return function(){
+		document.write(`<br>Hello World`);
+	}
+}
+outer1()();
+function outer2(name){
+	let msg= "안녕 내친구 "+ name;
+	return function(){
+		document.write(`<br>${msg}`);
+	}
+}
+outer2("스폰지밥")();// 안녕 내친구 스폰지밥
+
+let mbc= function(para1){
+	let b= function(para2){
+		return para2*2;
+	};
+	return `결과: ${b(para1)}`;
+	
+};
+//b(); // b는 종속함수라 부를수없다
+document.write('<br>'+mbc(11)); //결과: 22
+
+</script>
+
+
+
+
+
+</body>
+</html>

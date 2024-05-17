@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h2>반복문 for</h2>
+<script type="text/javascript">
+for(let a=1; a<=5; a++){
+	document.write(`a값은 ${a}<br>`);
+}
+
+//document.write(`for문을 벗어난 a값은 ${a}<br>`); //err. a: local변수. 
+for(let a=10; a>=1; a-=2){
+	document.write(`a값은 ${a}<br>`);
+}
+document.write('<br>');
+for(let a=1; a<=3; a++){
+	document.write(`a값은 ${a}&nbsp;&nbsp;`);
+	for(let b=1; b<=4; b++){
+		document.write(`b값은 ${b}&nbsp;&nbsp;`);
+	}
+	document.write('<br>');
+}
+
+document.write('<br>');
+for(let a=1; a<=10; a++) {
+	if(a===3)continue;
+	if(a===6)break;
+	document.write(`a값은 ${a}`);
+}
+</script>
+
+<h1>문제</h1>
+<script type="text/javascript">
+// 문1) 1-100사이의 정수중 3의 배수의 합과 갯수 출력 
+let sum=0, cnt=0;
+for(let a=1; a<=100; a++){
+	if(a%3===0) {
+		sum += a;
+		cnt++;
+	}
+}
+document.write(sum,' ',cnt);
+document.write('<br>');
+
+// 문2) 1-1000사이의 정수중 2의 배수이나 5의 배수가 아닌 수의 합 출력 
+// 조건: 숫자가 100을 넘으면 작업 중지
+let sum2=0;
+for(let b=1; b<=1000; b++) {
+	if(b%2===0 && b%5!==0){
+		if(b>100) break;
+		sum2 +=b;
+	}
+}
+document.write(sum2);
+document.write('<br>');
+
+// 문3) 2-9단 까지의 구구단 출력. (table tag 사용. border='1')
+// 조건: 각단은 행으로 구분
+// 조건: 짝수 단은노랑으로 배경을 채움. style적용(인라인방식)
+
+document.write('<table border="1">');
+
+for(let x=2; x<=9; x++) {
+	 document.write((x%2===0) ? '<tr style="background-color:yellow">':'<tr>'); 
+for(let y=1; y<=9; y++){
+	document.write(`<td>${x}*${y}=${x*y}</td>`);
+}
+document.write('</tr>');
+}
+document.write('</table>');
+// table 만드는 형식 익숙해지기. 
+
+
+
+
+
+</script>
+
+
+
+
+</body>
+</html>

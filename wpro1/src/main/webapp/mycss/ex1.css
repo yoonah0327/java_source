@@ -1,0 +1,69 @@
+@charset "UTF-8";
+/* css 주석 */
+
+#i2 {
+	background-color: yellow;
+	color: maroon;
+	font-size:20px;
+}
+
+h1,h2{
+	text-decoration: line-through;
+}
+
+table {width: 70%;margin-bottom: 10px; border:1px solid #dddddd;}
+
+table tr td{
+	padding: 5px 10px; border-top:1px dotted rgb(0,0,255);
+	border-bottom:3px double rgb(255,0,0);	
+}
+
+
+input {
+	border: 5px solid; background-color: rgb(90%,60%,0%);
+}
+input.btnOK {
+	border: 1px dotted; background-color: olive;
+}
+
+/* 동적 선택자 */
+input:focus {
+	background-color: #aabbcc;
+}
+
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	color: red;
+}
+a:active { 
+	color: yellow; font-family: 궁서;
+}
+a:hover { 
+	font-size: 30px; cursor: crosshair;
+}
+
+i,strong {
+	color:#000; background-color: silver;
+}
+
+b{font-size: 8px;}
+div b{font-size: 16px;} /* div의 자손 b 태그 */
+div > b{font-size: 24px;} /* div의 직계자식 b 태그 */
+div span b{font-size: 30px;} /* 직계아니어도 무방. dic-span-b만 충족요. */
+
+div b#hi{font-size:35px} /* id가 hi*/
+div b.hello{font-size:43px} /* class가 hello*/
+
+div#pic{
+	height: 130px; background-color: yellow;
+	background-image: url('../images/snow.png');
+}
+
+img{
+	border: 10px dotted black;
+}
+
+
+

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>기본함수</title>
+</head>
+<body>
+함수(function)란?<hr>
+하나의 특별한 목적의 작업을 수행하도록 설계된 독립적인 블록 {}을 의미한다.<br>
+<pre>
+자바스크립트에서 함수의 정의는 function 키워드로 시작되며, 다음과 같은 구성요소를 가진다.
+1. 함수의 이름
+2. 괄호 안에 쉼표(,)로 구분되는 함수의 매개변수(parameter)
+3. 중괄호({})로 둘러싸인 자바스크립트 실행문
+
+자바스크립트에서 함수를 정의하는 문법은 다음과 같습니다.
+문법
+function 함수이름(매개변수1, 매개변수2,...) {
+    함수가 호출되었을 때 실행하고자 하는 실행문;
+[return 반환값]
+}
+
+내장함수와 사용자 정의 함수로 나뉜다.
+</pre>
+<script type="text/javascript">
+document.write('내장함수 중 문자 관련 함수');
+let str= "Java script Language";
+document.write(`<br>str.charAt(2): ${str.charAt(2)}`); //str.charAt(2): v
+document.write(`<br>str.indexOf('v'): ${str.indexOf('v')}`); //str.indexOf('v'): 2
+document.write(`<br>str.indexOf('V'): ${str.indexOf('V')}`); //str.indexOf('V'): -1 //없으면 -1을 반환.
+document.write(`<br>str.substring(1,3): ${str.substring(1,3)}`); //str.substring(1,3): av //1이상3미만
+document.write(`<br>str.slice(0,3): ${str.slice(0,3)}`); //str.slice(0,3): Jav //0에서부터 3개. 
+
+document.write(`<br>내장 함수 중 스타일 관련 함수`); //여기는 모양이니 캡쳐하기
+document.write(`<br>str.bold(): ${str.bold()}`); 
+document.write(`<br>str.big(): ${str.big()}`);
+document.write(`<br>str.small(): ${str.small()}`);
+document.write(`<br>str.big().strike().fontsize(24): ${str.big().strike().fontsize(24)}`);
+
+document.write(`<br>내장 함수 중 수학 관련 함수`);
+document.write(`<br>Math.abs(-7): ${Math.abs(-7)}`);//Math.abs(-7): 7
+document.write(`<br>Math.round(3.6): ${Math.round(3.6)}`);//Math.round(3.6): 4
+document.write(`<br>Math.random(): ${Math.random()}`);//Math.round(3.6): 4
+
+document.write(`<br>내장 함수 중 날짜 관련 함수`);
+let d= new Date();
+document.write(`<br>Date(): ${Date()}`);//Date(): Fri May 17 2024 11:30:07 GMT+0900 (한국 표준시)
+document.write(`<br>d: ${d}`);//d: Fri May 17 2024 11:30:07 GMT+0900 (한국 표준시)
+document.write(`<br>${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일 ${d.getHours()}시`);
+//2024년 5월 17일 11시//월의경우 0부터 카운트하기에 +1을 해줘야한다
+
+document.write(`<br>내장 함수 중 기타 관련 함수`);
+document.write(`<br>parseInt(): ${parseInt('3.4')+5}`); //버림 //parseInt(): 8
+document.write(`<br>parseFloat(): ${parseFloat('3.4')+5}`); //실수화 //parseFloat(): 8.4
+document.write(`<br>isNaN(): ${isNaN('3.4')}`);//isNaN(): false // 숫자여부확인 아니나숫자
+document.write(`<br>isNaN(): ${isNaN('삼점사')}`);//isNaN(): true // 숫자아니지? 응나글자
+
+let ss1= encodeURI('자바스크립트');		
+document.write(`<br>encodeURI(): ${ss1}`); //인코딩
+//encodeURI(): %EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8
+let ss2= decodeURI(ss1);	
+document.write(`<br>decodeURI(): ${ss2}`); //디코딩
+//decodeURI(): 자바스크립트
+
+//별도의 창 열기: (open('파일명', 출력형태, '속성')) 
+open('js1.html', '_blank', 'width=300,height=200,left=100,top=200,resizable=yes');
+
+
+</script>
+</body>
+</html>

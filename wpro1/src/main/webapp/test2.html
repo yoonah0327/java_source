@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>이미지와 링크</title>
+</head>
+<body>
+이미지 출력 <br> <!-- 1.이미지 다운받아 폴더에저장하고 불러오기  -->
+<img title="그림" src="images/cat_pic.jpg" width="400" height="300">
+<br> <!-- 2. 사이트내이미지에서 이미지의주소를가지고온경우 -->
+<img src="https://t1.daumcdn.net/daumtop_deco/images/pctop/2023/logo_daum.png">
+<br> <!-- 3. 플래시파일 -->
+<embed src="images/tetris.swf" autostart="true">
+<hr>
+a 태그 : 하이퍼링크가능<br>
+<a href="test1.html">test1 문서</a>보기<br> <!-- 현재프레임에 덮어쓰기  -->
+<a href="test1.html" target="_self">test1문서(_self)</a>보기<br> <!--상동  --> 
+<a href="test1.html" target="_new">test1문서(_new)</a>보기<br> <!-- 새로운프레임  -->
+<a href="test1.html" target="_blank">test1문서(_blank)</a>보기<br> <!--새로운프레임   -->
+
+<a href="https://www.naver.com">네이버 출발</a>보기<br> <!-- 현페이지에 네이버덮어쓰기 -->
+<a href="https://www.naver.com" target="_new">네이버 출발(_new)</a>보기<br><!-- 네이버새로키기 -->
+
+<a href="test1.html">
+<img title="연습" src="images/cat_pic.jpg" width="100" height="70">
+</a><br>
+
+<a href="files/book1.xlsx">엑셀문서</a><br> <!-- 파싱이 안됨. 다운로드로 넘어감 -->
+<a href="files/code.txt">텍스트문서</a><br> <!-- 됨 -->
+
+<a href="mailto:sweety_dnwjd@naver.com">ME에게 메일전송</a>
+
+<hr>
+<a href="META-INF/aaa.html">META-INF 폴더 내 파일</a><br> <!-- X -->
+<a href="WEB-INF/bbb.html">WEB-INF 폴더 내 파일</a><br> <!-- X -->
+
+
+<a href="kbs/a.html">kbs폴더 내 파일</a><br> <!-- 가 --> 
+<!-- http://localhost/wpro1/kbs/a.html --> 
+<!-- <a href="/wpro1/kbs/a.html">kbs폴더 내 파일</a><br> 이거와 같은것. -->
+<a href="/kbs/a.html">kbs폴더 내 파일</a><br> <!-- X --> 
+<!-- http://localhost/kbs/a.html. 현 context의 root-->
+
+<a href="kbs/sbs.b.html">sbs폴더</a><br> 
+<a href="kbs/sbs/tvn/c.html">tvn폴더</a><br> 
+
+<pre>
+.
+.
+.
+.
+.
+.
+</pre>
+</body>
+</html>

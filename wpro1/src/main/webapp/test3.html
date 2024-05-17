@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	table 태그 연습
+	<br>
+	<table border="1">
+		<!-- 꾸밈은 css권장 -->
+		<thead>
+			<tr>
+				<th>제목1</th>
+				<!-- 자동 볼드, 가운데정렬 -->
+				<th>제목2</th>
+				<!-- th는 tr에 종속되어야 가. -->
+				<th>제목3</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th>내용1내용1이야!!</th>
+				<!-- 가장긴칸에 맞춰줌 -->
+				<th>내용2</th>
+				<th>내용3</th>
+			</tr>
+			<tr>
+				<th>내용4</th>
+				<th>내용5</th>
+				<th>&nbsp;</th>
+				<!--빈칸이지만 가독성위해 일부러이렇게적어줌 -->
+			</tr>
+		</tbody>
+	</table>
+	<br>
+	<table border="2" bgcolor="yellow"
+		style="background-image: url('images/snow.png')">
+		<!-- 배경으로 깔리는것 -->
+		<caption>상품자료</caption>
+		<tr bgcolor="red">
+			<td bgcolor="silver"><b>상 품 명</b></td>
+			<td>수량</td>
+			<td>단가</td>
+		</tr>
+		<tr>
+			<td>컴퓨터</td>
+			<td align="center">2</td>
+			<td><img src="images/cat_pic.jpg" width="50" height="30">
+				<!-- 이건 글자처럼 자원으로 입력 --></td>
+		</tr>
+		<tr>
+			<td>a</td>
+			<td>
+				<table border="3">
+					<tr>
+						<td><a href="https://www.daum.net">daum</a></td>
+						<td>나</td>
+					</tr>
+				</table>
+			</td>
+			<td>c</td>
+		</tr>
+	</table>
+	<br>
+	<!-- 행 병합 row span, 열 병합 col span -->
+	<table border="1" width="60%">
+		<!-- %비율로 주니, 창 사이즈에 따라 표 사이즈가 변한다 -->
+		<tr>
+			<td colspan="2">a</td>
+			<td>b</td>
+			<td rowspan="2">c</td>
+		</tr>
+		<tr>
+			<td>d</td>
+			<td>e</td>
+			<td>f</td>
+		</tr>
+	</table>
+	
+	<br>
+	<table border="1" width="200">
+		<tr>
+			<td rowspan="2">1</td>
+			<td colspan="2">2</td>
+			<td rowspan="2">3</td>
+		</tr>
+		<tr>
+			<td colspan="2">4</td>
+		</tr>
+		<tr align="center">
+			<td>5</td>
+			<td>6</td>
+			<td>7</td>
+			<td rowspan="2">8</td>
+		</tr>
+		<tr>
+			<td>9</td>
+			<td colspan="2">10</td>
+		</tr>
+	</table>
+	
+<br><br>
+한 화면에서 여러개의 html문서를 보고자 할 경우 iframe 사용<br>
+<iframe src="test1.html" name="star" width="99%" height="300"></iframe>
+<br/>
+<a href="test2.html" target="star">test2 보기(iframe 에서)</a>
+<p/>
+이미지 맵: 이미지를 여러 영역으로 지정해 각 영역마다 link를 걸수있다
+<br>
+<img src="images/snow.png" width="200" usemap="#snow"/>
+<map name="snow">
+<area shape="rect" coords="0,0,50,50" href="http://www.naver.com"><br>
+<area shape="rect" coords="50,100,100,200" href="http://www.w3.org">
+</map>
+<pre>
+.
+.
+.
+</pre>	
+	
+	
+	
+
+</body>
+</html>
