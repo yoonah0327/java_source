@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>상속</title>
+<script type="text/javascript">
+class Animal{
+	move = '움직임';
+	
+	constructor(name){
+		document.write(`<br>Animal 생성자`);
+		this.name= name;
+		this.speed= 0;
+		
+	}
+	run(speed){
+		this.speed = speed;
+		document.write(`<br>${this.name}: ${this.speed}`);
+		document.write(`<br>${this.move}`);
+	}
+	stop(){
+		this.speed=0;
+		document.write(`<br>${this.name}: stop`);
+	}
+	disp(){
+		document.write(`<br>동물임을 선언하노라`);
+	}
+}
+
+class Rabbit extends Animal{ // 래빗이 애니멀을 상속받는것
+	leg =2;
+	//move= "움직임2";
+	
+	constructor(name, leg){ //생성자
+		document.write(`<br>Rabbit 생성자`); //자바의경우 무조건super가 첫문장이어야한다
+		//super();
+		super(name);//부모생성자 호출 //js오버로딩안됨. 애니멀클래스에서 name있는 생성자갖고있음.그대로부름.
+		this.leg = leg;
+	}
+	stop(){ //메소드 overriding
+		super.stop(); //수퍼(); 수퍼.(); this. //super.메소드는 가.
+		//this()구조적으로 있을수가없다
+		document.write(`<br>Rabbit의 stop 메소드`);
+		this.disp();
+		this.hide();
+	}
+	disp(){//메소드 overriding
+		document.write(`<br>토끼 만세`);
+		document.write(`<br>super.move: ${super.move}`); //undefined
+		document.write(`<br>this.move: ${this.move}`);//움직임//현클래스에서찾다가 없으면, 부모클래스에서찾기.
+	//메소드내에서 super.멤버필드는 X. this.멤버필드만 가.
+	}
+	
+	hide(){//Rabbit의 고유메소드
+		document.write(`<br>Rabbit의 고유메소드 ${this.name} 숨어버리다`);
+	}
+	
+}
+
+//class Dog extends Animal, Rabbit{} //다중상속불가
+class Dog extends Animal{
+	constructor(name){
+		super(name);
+	}
+	disp(){ //메소드 overridding
+		document.write(`<br>댕댕이 화이팅: 열심히 ${this.move}`);
+	}
+	
+}
+
+
+
+
+function func(){
+	const ani= new Animal('동물 수퍼클래스');
+	ani.disp();
+	ani.run(5);
+	ani.stop();
+	
+	document.write(`<br>상속을 알아보자<br>`);
+	const rabbit= new Rabbit('토끼',4);
+	rabbit.disp();
+	rabbit.run();//래빗클래스에 없어서 부모클래스로 올라감
+	document.write(`<br>-----------`);
+	rabbit.stop();
+	rabbit.hide();
+	
+	document.write(`<br>===============`);
+	const dog = new Dog('우리 댕댕이');
+	dog.disp();
+	dog.run(5);
+	dog.stop();
+	
+	document.write(`<br>~~~~다형성~~~~~~~`);
+	let poly= rabbit; //자바와 다름. 일반변수를 사용.
+	poly.disp(); // rabbit의 disp()
+	document.write(`<br>`);
+	poly = dog;
+	poly.disp(); //dog의 disp() 
+	
+	
+}
+</script>
+</head>
+<body onload="func()">
+<h1>클래스의 상속</h1>
+객체들 간 관계를 구축하는 방법. 
+부모(super)클래스 등의 기존 클래스로부터 속성과 동작을 상속을 통해 자식클래스를 만들 수 있다.
+</body>
+</html>

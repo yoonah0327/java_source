@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function func(){
+	console.log('good'); //good
+	let dateTime= "2026-05-20";
+	let arrData= dateTime.split('-');
+	console.log(`${arrData[0]}년 ${arrData[1]}월 ${arrData[2]}일`); //2026년 05월 20일	
+}
+</script>
+</head>
+<body>
+<a href="https://naver.com">네이버</a><br>
+<br>
+<a href="javascript:func()">이벤트처리 함수 호출1</a><br>
+<br>
+<!-- 이벤트 연결: on이벤트종류=핸들러함수() -->
+<a href="javascript:onclick=func()">이벤트처리 함수 호출2</a><br>
+<br>
+<button onclick="func()">이벤트처리 함수 호출3</button>
+<br>
+<input type="button" onclick="func()" value="이벤트처리 함수 호출4" />
+
+</body>
+</html>

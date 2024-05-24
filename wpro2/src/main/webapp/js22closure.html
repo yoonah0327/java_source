@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>클로저</title>
+</head>
+<body>
+클로저
+<hr>
+<script type="text/javascript">
+function func(){
+	let name= 'tom';
+	let no=1;  //지역변수
+	function displayName(){ // 내부함수
+		console.log(name+no);
+		no++;
+	}
+	displayName();
+}
+func(); //tom1
+func();//tom1
+func();//tom1
+// no++했는데 1이 증가하지않았다. 왜냐, 초기화가 되므로!
+
+//클로져 사용
+function makefunc(){
+	let name= 'james';
+	let no=1;  //지역변수
+	function displayName(){ // 내부함수
+		console.log(name+no);
+		no++;
+	}
+	return displayName; //이게 클로저. 내부함수의 "주소반환". 뒤에()붙이면 실행결과반환.
+}
+let myfunc= makefunc();//displayName함수의 주소를 치환
+myfunc(); //james1
+myfunc(); //james2
+myfunc(); //james3
+
+function makeAdd(x){
+	return function(y){ //함수의실행결과가 아니라, 함수를반환
+		return x+y;
+	};
+}
+let tot= makeAdd(5); //함수내부를 밖에서 계속 참조할수있게해준다
+console.log(tot(3)); //8
+console.log(tot(5));//10
+let tot2= makeAdd(10);
+console.log(tot2(3)); //13
+console.log(tot2(5)); //15
+
+</script>
+</body>
+</html>

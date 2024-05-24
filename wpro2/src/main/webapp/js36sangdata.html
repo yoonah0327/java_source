@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload= () =>{
+	document.querySelector("#btnOk").onclick = sijak;
+	
+	
+}
+let xhr;
+
+function sijak(){
+	//alert("si");
+	xhr = new XMLHttpRequest();
+	xhr.open('get', 'js36.jsp', true); //false 동기방식. 자료넘어오는동안(표만들기) 텍스트작업불가함
+	
+	xhr.onreadystatechange = function(){
+		if(xhr.readyState===4){
+			if(xhr.status===200){
+			process();
+			}
+		}
+}
+	xhr.send(null);
+}
+function process(){
+	let data = xhr.responseText;
+	//alert(data);
+	let parseData= JSON.parse(data);
+	//alert(parseData.sangpum.length);//5
+	
+	let str = "<table border='1'>";
+	str += "<tr><th>코드</th><th>상품명</th><th>수량</th><th>단가</th></tr>";
+	
+	for(let i=0; i <parseData.sangpum.length; i++){
+		str += "<tr>"; //36jsp파일에서 코드상수단이라고 해서 여기서도 .code이런식으로 적은것
+		str += "<td>" + parseData.sangpum[i].code + "</td>";
+		str += "<td>" + parseData.sangpum[i].sang + "</td>";
+		str += "<td>" + parseData.sangpum[i].su + "</td>";
+		str += "<td>" + parseData.sangpum[i].dan + "</td>";
+		str += "</tr>";
+	} 
+	
+	str += "</table>";
+	
+	document.getElementById("disp").innerHTML = str;
+	}
+</script>
+</head>
+<body>
+<h2>MariaDB자료 json으로 읽기</h2>
+<textarea rows="10" cols="80"></textarea>
+<br><br>
+<button id= "btnOk">json으로 읽기</button>
+<hr>
+<div id= "disp"></div>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>클래스 연습</title>
+</head>
+<body>
+<script type="text/javascript">
+/*
+ * 클래스는 oop에서 특정 객체를 생성하기 위해 멤버를 정의하는 일종의 설계도.
+ 기존의 prototype을 기반으로 객체를 생성하는 것보다 좀 더 명료하게 객체작성가능.
+ */
+class Class1{ 
+	addr= '서울'; //멤버변수. prototype 속성. let X,const X.
+	//name; // 생성자로 값을 받을때는 생략 가. 가독성을 위해 적었다.
+	
+	constructor(name){ //생성자
+		this.name = name; //각 인스턴스의 멤버변수로 만들어짐
+	}
+	sayHi(){ //멤버 메소드
+		document.write("<br>", this.name);
+		document.write("<br>", this.addr);
+		let msg = "프로그래머"; //지역변수(sayHi에서만 유효한)
+		return "<br>이름은 "+ this.name+ " "+ msg; //그래서 name과달리msg의 경우 -.형태일필요없음.
+	}
+}
+let c1 = new Class1('신기해');
+document.write("<br>", c1, " ", typeof Class1," " ,typeof c1);//[object Object] function object
+document.write("<br>주소는 ", c1.addr); //주소는 서울
+document.write(c1.sayHi());
+/*신기해
+ *서울
+ *이름은 신기해 프로그래머
+ */
+document.write("<br>");
+let c2= new Class1('한국인');
+document.write(c2.sayHi());
+/*한국인
+서울
+이름은 한국인 프로그래머
+ */
+document.write("<hr>");
+class Class2{
+	subject= '자바스크립트'; //접근지정자 x. 기본적으로 public으로 보면된다
+	
+	//constructor(){} //생성자 overloading 불가
+	constructor(name, nai){
+		this.name=name;
+		this.age= nai;
+	}	
+	printData(){
+		document.write(`<br>이름은 ${this.name}이고 나이는 ${this.age}`);
+		document.write(`<br>수강과목은 ${this.subject}`);
+		//return undefined; //return을 적든생략하든 undefined를 반환	
+	}
+	//printData(){} //메소드 overloading 불가
+	
+	//getter, setter 사용이유: private멤버를 처리하기위해
+	get getSubject(){ //이름은 동적
+		return this.subject;
+	}
+	get nameAndAddr(){
+		return `${this.name}의 나이는 ${this.age}`;
+	}
+	set setName(name){ //사실 setter는 많이 사용되지는 않는다
+		this.name = name;
+	}
+}
+let test1 = new Class2('김밥',22);
+document.write("<br>",test1.printData());
+//이름은 김밥이고 나이는 22. 수강과목은 자바스크립트undefined
+test1.printData();
+//이름은 김밥이고 나이는 22. 수강과목은 자바스크립트
+document.write("<br>",test1.subject); // 자바스크립트
+document.write("<br>",test1.name); //김밥
+document.write("<br>",test1.age);//22
+
+test1.name= '홍길동'; //setter역할하고있다
+document.write("<br><br>",test1.name);//홍길동
+test1.printData();//이름은 홍길동이고 나이는 22. 수강과목은 자바스크립트
+
+document.write("<br>", test1.getSubject); //자바스크립트//getter메소드의 이름만적음. ()X
+document.write("<br>", test1.nameAndAddr);//홍길동의 나이는 22
+test1.setName= '공기밥'; //setter메소드의 이름으로 치환
+document.write("<br>", test1.nameAndAddr);//공기밥의 나이는 22
+
+let test2= new Class2('주먹밥', 25);
+//..
+
+document.write("<hr>");
+class Class3{
+	#name; //private 멤버 변수. modern js에서만지원됨.
+	age; //public 멤버 변수.
+	static addr= '서울';
+	
+	constructor(name, age){
+		this.#name = name;
+		this.age = age;
+	}
+	get getName(){ //게터세터 이름마음대로해된다. 
+		//그래서 get name()이렇게 하고, 밑에서 person.name하면 얘가 호출된다
+		return this.#name;
+	}
+	
+}
+const person= new Class3('이기자',23);
+document.write("<br>", person);//[object Object]
+document.write("<br>", person.age);//23
+document.write("<br>", person.name); //undefined
+//document.write("<br>", person.#name);//err
+document.write("<br>", person.getName);//이기자
+document.write("<br>", person.addr);//undefined
+document.write("<br>", Class3.addr);//서울
+
+</script>
+</body>
+</html>

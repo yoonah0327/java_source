@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload = () => {
+	document.querySelector("#btnOk").onclick = function(){
+		start();
+	}
+	document.querySelector("#btnOk2").onclick = start;
+	document.querySelector("#btnOk3").onclick = start;
+	document.querySelector("#btnOk4").onclick = start;
+}
+
+
+let xhr;
+
+function start(){
+	//alert("a");
+	xhr = new XMLHttpRequest(); // AJAX 지원 js 객체 //1. 객체만들기
+	//xhr.open('get', 'js34text.txt', true); //2. open
+		// 1요청방식결정(get/post) 2요청파일명. 경로가다르면 앞에 경로명적어주기.
+		//3true 비동기방식 false 동기방식. ajax는거의true	
+	//xhr.open('get', 'js34csv.txt', true);//csv읽기
+	//xhr.open('get', 'js34.xml', true); // xml읽기
+	xhr.open('get', 'js34.json', true); //json읽기
+		
+	
+//CORS를 따름: Same-Origin Policy(SOP)는 웹보안의 기본원칙중 하나. 해킹주의!
+	xhr.onreadystatechange = function(){ //3.onreadystatechange //요게 겟방식의 클래식한방식
+		//alert(xhr.readyState);//통신상태확인(물리적.하드웨어적)
+		if(xhr.readyState===4){
+			//alert(xhr.status); //경로명및파일오류 404. 요청방식오류 403. 요청한해당파일에에러있으면 500. 아무문제없으면 200.
+			if(xhr.status===200){// 아무문제없으면 그제야 비동기상태의 요청이들어간다
+			process();
+				
+			}
+		}
+	} 
+	xhr.send(null); //4. send
+} 
+function process(){
+	//<txt파일인경우>
+	/*
+	let data = xhr.responseText;//xml형식외 문서인경우 responseText. 
+	console.log(data);
+	document.querySelector("#disp").innerHTML = data;
+	*/
+	
+	
+	//<csv 파일인경우> 행은 enter로구분. 열은 ,로구분.
+	/*
+	let data = xhr.responseText;
+	let rowData= data.split(String.fromCharCode(13)); //Ascii코드 13은 enter
+	//alert(rowData.length); //3
+	let str = "";
+	for(let i=0; i< rowData.length; i++){
+		let colData= rowData[i].split(",");
+		for(let j=0; j< colData.length; j++){
+			str += colData[j] + " ";
+		}
+		str += "<br>";
+	}
+	document.querySelector("#disp").innerHTML = str;
+	*/
+	
+	//<xml 파일인 경우>
+/*	
+	//let data = xhr.responseText; //xml모양의 일반텍스트문서. dom 처리불가.
+	let data = xhr.responseXML; //오브젝트로 넘어옴 //xml객체읽기. dom 처리가능.
+	//alert(data);
+	let itemNode = data.getElementsByTagName("item");
+	//alert(itemNode.length); //3
+	let codeNode= data.getElementsByTagName("code");
+	let sangNode= data.getElementsByTagName("sang");
+	let str = "";
+	for(let i=0; i<itemNode.length; i++){
+		str += codeNode[i].childNodes[0].nodeValue + " ";
+		str += sangNode[i].firstChild.nodeValue + " ";
+		str += codeNode[i].getAttribute("price");
+		str += "<br>";
+	}
+	document.querySelector("#disp").innerHTML = str;
+*/
+
+// <json 파일인 경우>
+	let data = xhr.responseText;
+ 	//alert(data);
+ 	let parseData = JSON.parse(data); //문자열을 JSON객체화. 그래야 배열처리가.
+ 	//alert(parseData); //오브젝트로 넘어옴
+ 	//alert(parseData.sangpum.length);//3
+	let str = "";
+ 	for(let i=0; i<parseData.sangpum.length; i++){
+ 		str += parseData.sangpum[i].code+ " "+ parseData.sangpum[i].sang+ "<br>";
+ 	}
+ 	document.querySelector("#disp").innerHTML = str;
+}
+
+
+</script>
+</head>
+<body>
+<h2>Ajax test</h2> 
+<!-- 데이터갖고오는데 페이지상단의 새로고침버튼이 안깜박거린다. 그게비동기방식. -->
+<button id="btnOk">Ajax원리찾기</button>
+<br>
+<button id="btnOk2">CSV 읽기</button>
+<br>
+<button id="btnOk3">XML 읽기</button>
+<br>
+<button id="btnOk4">JSON 읽기</button>
+<hr>
+<div id="disp"></div>
+</body>
+</html>

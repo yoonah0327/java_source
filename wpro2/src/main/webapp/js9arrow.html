@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>화살표 함수 </title>
+<script type="text/javascript">
+const sum1= function(a,b) {
+	return a+b;
+}
+console.log(`두 수의 합은 ${sum1(3,4)}`);
+
+const sum2= (a,b) => a+b;
+console.log(`두 수의 합은 ${sum2(3,4)}`); //두 수의 합은 7
+// 자바에선 -> js는 => sum1과 sum2 같은결과 다른방법. sum2가 더 간결하다.
+// 엄격모드~ 
+
+let double1= n => n*2; // 파라미터 1개면 괄호 생략가.
+console.log(double1(3)); //6
+
+let sayHi = () => '안녕하세요'; // 파라미터가 없으면 괄호생략하면안됨.
+console.log(sayHi()); 
+
+//let age = prompt('나이 입력', 22);
+let age = 33;
+let welcome = (age < 30)?() => "안녕":() => "반가워"; // 삼항연산자. 참일때 안녕, 거짓일때 반가워
+console.log(welcome());
+
+// ---- 콜백 함수 ------
+console.clear(); //콘솔을 깨끗하게 비운다. 
+let sunFunc = (a,b) =>  {
+	let result = a+b;
+	return result;
+}
+console.log(`sunFunc 결과: ${sunFunc(3,4)}`); //sunFunc 결과: 7
+// 수행문장이 복수면 {} 해야함. 반환값있을경우 return. 수행문장 1개면 {}, return 생략가. 
+
+// 반복문 처리 : for
+function func(...para) { //구조분해연산자 
+	console.log(para.length, ' ', para); //4 ' ' (4) ['a', 'b', 'c', 'd']
+
+	for(let i= 0; i<para.length; i++){
+		console.log(para[i]); //a b c d가 차례로 찍힌다
+	}
+	for(let s of para){ //배열일땐 of 객체일땐 in
+		console.log(s); //a b c d가 차례로 찍힌다
+	}
+	//Array.forEach(callbackFn [,arg]: array 클래스 메소드. 반환값없음.
+	para.forEach(function(obj){ // 콜백함수
+		console.log(obj); //a b c d가 차례로 찍힌다
+	});
+	
+	(para.forEach((obj)=> console.log(obj))); //콜백에서 화살표함수써봄 //a b c d가 차례로 찍힌다
+}
+
+func('a','b','c','d');
+
+// -------
+// setInterval() 함수는 어떤 코드를 일정한 시간 간격을 두고 반복해서 실행하고 싶을때 사용
+//setInterval(수행함수, 시간). 반복계속수행.
+//setInterval(() => console.log(new Date()), 2000);
+
+// setTimeout() 어떤 코드를 바로 실행하지않고 바로 실행해야하는경우. 
+// 2초기다린후 어떤 문자열을 콘솔에 출력 // setTimeout(수행함수, 시간) // 1번만수행
+//setTimeout(() => console.log("2초 후에 실행됨"), 2000);
+
+console.log('처리1');
+setTimeout(function(){
+	console.log('처리2');
+}, 3000);
+console.log('처리3');
+// 처리1- 처리3- 3초후 처리2
+
+// argument로 화살표 함수 사용
+function abcFunc(su, f1, f2){
+	if(su % 2 ===0) f1(); else f2();
+}
+
+abcFunc(2, ()=>console.log('짝수'), ()=>console.log('홀수'));
+
+/*
+	function showOk(){ //텀을 두고 나중에실행될것을 예약해두는 콜백함수 쇼오케이, 쇼켄슬함수
+		console.log('네 좋습니다');
+	}
+	function showCancel(){
+		console.log('아니오 싫은데욥');
+	}
+function ask(question, yes, no){
+	if(confirm(question)) yes(); else no();
+}
+
+ask("동의합니까?", showOk, showCancel);
+*/
+
+
+
+
+
+
+
+</script>
+
+</head>
+<body>
+<h2>화살표 함수 </h2>
+함수 표현식보다 단순하고 간결한 문법으로 함수를 만드는 방법.
+</body>
+</html>

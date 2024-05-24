@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+별도 작성된 js파일, 모듈 읽기
+<!-- 모듈은 프로그램을 구성하는 구성요소의 일부를 말한다.  -->
+<script type="text/javascript" src="js/js32.js"></script>
+<script type="text/javascript">
+kbsFunc(); //함수호출
+</script>
+<hr>
+<script type="module">
+import {user} from './js/js32module.js';
+import {msg} from './js/js32module.js';
+import {sayHi} from './js/js32module.js';
+import {func} from './js/js32module.js';
+import {f1, f2} from './js/js32module.js';
+
+import defau from './js/js32module.js';
+import {months} from './js/js32module.js';
+import {Cur_YEAR} from './js/js32module.js';
+import {HelloClass} from './js/js32module.js';
+
+console.log('--------------');
+console.log(user);
+console.log(msg.name,' ', msg['price']);
+
+console.log('-------^^^-------');
+console.log(sayHi('신기해'));
+console.log(func(3,4));
+console.log(f1('신기해'));
+console.log(f2('신기루'));
+
+console.log(defau);
+
+console.log('~~~~~~~~');
+console.log(months[0]+' '+months[1]);
+console.log(Cur_YEAR);
+
+let hello = new HelloClass('모듈 연습중');
+console.log(hello.msg);
+</script>
+<script type="text/javascript">
+async function dyFunc(){
+	let say = await import ('./js/js32module.js');
+	say.hi();
+	say.bye();
+}
+
+
+</script>
+<button onclick="dyFunc()">비동기로 모듈처리</button>
+
+</body>
+</html>

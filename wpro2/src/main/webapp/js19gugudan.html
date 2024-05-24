@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload= () => {
+	document.getElementById("sel").onchange = function(){
+		let dan = danconts= "";
+		
+		const sel= frm.sel.options[frm.sel.selectedIndex].value;
+		console.log(sel); 
+		
+		if(sel==='2'){
+			dan = sel+"단";
+			danconts= func(2);
+		}else if(sel==='3'){
+			dan = sel+"단";
+			danconts= func(3);
+		}else if(sel==='4'){
+			dan = sel+"단";
+			danconts= func(4);
+		}else if(sel==='5'){
+			dan = sel+"단";
+			danconts= func(5);
+		}else if(sel==='6'){
+			dan = sel+"단";
+			danconts= func(6);
+		}else if(sel==='7'){
+			dan = sel+"단";
+			danconts= func(7);
+		}else if(sel==='8'){
+			dan = sel+"단";
+			danconts= func(8);
+		}else if(sel==='9'){
+			dan = sel+"단";
+			danconts= func(9);
+		}
+		console.log(dan, ' ', danconts);
+		
+		addRow(dan, danconts);
+		
+		document.getElementById("myTable").setAttribute("border",1);
+	}
+	
+}
+
+function func(){ //구구단 함수
+	for(let i=1; i<=9; i++){
+		console.log(sel+"x"+i+"="+sel*i);
+	}
+}
+
+
+function addRow(dan, danconts){ //tr생성작업하는곳
+	let row =document.createElement('tr');
+	let col= addCol(dan);
+	row.appendChild(col);// <tr><td>상품명</td></tr>
+	col= addCol(danconts);
+	row.appendChild(col);// <tr><td>상품명</td><td>설명</td></tr>
+	
+	document.getElementById("myTbody").appendChild(row); //테이블에 넣기
+}
+function addCol(para){//td생성하는곳
+	let col= document.createElement('td');
+	let ctext= document.createTextNode(para);
+	col.appendChild(ctext); // td에 상품 넣기?
+	return col; //<td>값</td>
+}
+
+
+</script>
+</head>
+<body>
+<h2>구구단 출력</h2>
+<form action="#" name="frm">
+단: 
+<select name= "sel" id="sel">
+	<option value="2">2단</option>
+	<option value="3">3단</option>
+	<option value="4">4단</option>
+	<option value="5">5단</option>
+	<option value="6">6단</option>
+	<option value="7">7단</option>
+	<option value="8">8단</option>
+	<option value="9">9단</option>
+	
+</select>
+<br>
+<!-- header가 필요한가?? -->
+<table id="myTable">
+	<tbody id="myTbody"></tbody>
+</table>
+</form>
+</body>
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<!-- bootstrap cdn 복붙. https://cafe.daum.net/flowlife/OLrk/53 -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script type="text/javascript">
+<!-- submit기능은 자료검사하지않고 그냥 넘겨버린다. 기능을 죽여보자 -->
+window.onload= () => {
+	document.querySelector("#btnSend").onclick = chkData;
+	document.querySelector("#btnClear").onclick = clsData;
+}
+
+function chkData(e){
+	e.preventDefault(); //submit기능 해제
+	
+	//이름 입력자료 오류검사 후 서버로 자료 전송
+	if(frm.name.value==="" || isNaN(frm.name.value)===false){
+		frm.name.focus();
+		alert("이름을 입력하세요");
+		return;
+	}
+	//아이디 입력자료 오류검사
+	if(frm.id.value.length < 3){
+		frm.id.focus();
+		alert("id는 3자이상 입력하세요");
+		return;
+	} 
+
+	
+	//정규 표현식- 여러용도중 입력자료 검사용.-- 외우는것x. 필요할때마다 검색해서함.
+	let str= "123Abc가나다45홍 asdf1 23길동";
+	console.log(str.match(/[1]/)); // 반환값은배열.최초의1개만반환.
+	console.log(str.match(/[1]/g)); //반환값 배열. 해당되는모든값반환. //['1', '1']
+	console.log(str.match(/[0-9]/g));// ['1', '2', '3', '4', '5', '1', '2', '3']
+	console.log(str.match(/\d/g)); //상동. 숫자만
+	console.log(str.match(/[0-9 ]/g));// 숫자와공백.['1', '2', '3', '4', '5', ' ', '1', ' ', '2', '3']
+	console.log(str.match(/[가나]/g));// ['가', '나']
+	console.log(str.match(/[가-힣]/g)); //한글 한글자씩.['가', '나', '다', '홍', '길', '동']
+	console.log(str.match(/[a-zA-Z0-9]/g));//영문, 숫자만
+	//['1', '2', '3', 'A', 'b', 'c', '4', '5', 'a', 's', 'd', 'f', '1', '2', '3']
+	console.log(str.match(/[a-z]/gi)); //i:ignore.대소문자구분x.모든영문자반환.
+	console.log(str.match(/[가-힣]+/g)); // 한글(새로운문자가나오기전까지)//['가나다', '홍', '길동']
+	console.log(str.match(/\d{2}/g)); //숫자연속2글자만.//['12', '45', '23']
+	console.log(str.match(/\d{2,3}/g)); //숫자연속2or3글자만//['123', '45', '23']
+//------------연습------
+
+    // 이메일검사
+ 	let regExp= /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
+	if(!frm.email.value.match(regExp)){
+		frm.email.focus();
+		alert("이메일을 정확히 입력하세요");
+		return;
+	}
+	// 나이검사
+	let regExp2= /^[0-9]{1,2}$/ //첫글자는숫자로1or2자. 숫자로끝나야해.
+	if(!frm.email.value.match(regExp2)){
+		frm.age.focus();
+		alert("나이는 숫자만 입력하세요");
+		return;
+	}
+	
+	frm.action = "js17form.jsp";
+	frm.method= "post";
+	frm.submit(); //하단에 get, post방법대신 요렇게 할수도있다. 이걸 w3c는 권장함.
+}
+
+function clsData(){ // reset + 추가기능(커서이동)
+	alert("cls"); // 자료넣고 삭제버튼누르면, 팝업이 뜨고, 또 삭제되는것도 먹는다.
+	//frm.name.focus(); 아래와 같은효과. 폼의네임에 focus
+	document.querySelector("#name").focus(); //아이디의네임에 focus
+}
+</script>
+
+
+
+
+</head>
+<body>
+** 개인 자료 입력 **<br>
+<!--  <form action="js17form.jsp" name="frm" method="post">  -->
+<!-- method:"get" : url에 넘어가는정보가 보인다 -->
+<!-- http://localhost/wpro2/js17form.jsp?name=%ED%99%8D%EA%B8%B8%EB%8F%99&id=dd&email=dd&age=dd -->
+<!--  http://localhost/wpro2/js17form.jsp 이렇게 post로 하면 안보인다 -->
+
+<form name="frm"></form>
+<!-- https://www.w3schools.com/bootstrap4/tryit.asp?filename=trybs_table_dark_hover&stacked=h -->
+<table class="table table-dark table-hover">
+<tr>
+<td>이 름</td>
+<td><input type="text" name= "name" id="name" value="홍길동"></td>
+</tr>
+<tr>
+<td>아 이 디</td>
+<td><input type="text" name= "id" placeholder="3자 이상"></td>
+</tr>
+<tr>
+<td>이 메 일</td>
+<td><input type="text" name= "email"></td>
+<!-- 타입을 이메일로 할경우 자바스크립트효과 @넣으세요 등이 나타난다 -->
+</tr>
+<tr>
+<td>나 이</td>
+<td><input type="text" name= "age" maxlength="2"></td>
+</tr>
+<tr>
+<td colspan="2" style= "text-align:center;">
+<input type="submit" id= "btnSend" value="자료 전송" class="btn btn-dark">
+<input type="reset" id= "btnClear" value="자료 삭제" class="btn btn-link
+">
+<!-- submit reset에 이미 자바스크립트효과가 들어가있다.  -->
+</td>
+</tr>
+</table>
+</form>
+<!-- https://www.w3schools.com/bootstrap4/bootstrap_buttons.asp -->
+<button type="button" class="btn">Basic</button>
+<button type="button" class="btn btn-primary">Primary</button>
+<button type="button" class="btn btn-secondary">Secondary</button>
+<button type="button" class="btn btn-success">Success</button>
+<button type="button" class="btn btn-info">Info</button>
+<button type="button" class="btn btn-warning">Warning</button>
+<button type="button" class="btn btn-danger">Danger</button>
+<button type="button" class="btn btn-dark">Dark</button>
+<button type="button" class="btn btn-light">Light</button>
+<button type="button" class="btn btn-link">Link</button>
+<br><br><!-- 실무에선 alert대신 modal쓴다 -->
+<!-- https://www.w3schools.com/bootstrap4/bootstrap_modal.asp -->
+<!-- Button to Open the Modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+  대화상자
+</button>
+
+<!-- The Modal -->
+<div class="modal" id="myModal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Modal body..
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</body>
+</html>

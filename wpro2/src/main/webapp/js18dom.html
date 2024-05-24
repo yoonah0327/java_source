@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function abc(){
+	let my= document.getElementById("my");
+	console.log(my.nodeName+" "+ 
+			my.childNodes[0].nodeValue+" "+
+			my.firstChild.nodeValue); //H2 Dom 객체 참조 Dom 객체 참조
+	console.log(my.getAttribute("id")); //my
+	console.log(my.getAttribute("comments"));//이건 속성
+}
+
+function def(){
+	let arr= document.getElementsByTagName("input");
+	console.log("arr의 크기: ", arr.length); //arr의 크기:  2
+	console.log(arr[0].getAttribute("value"));//id 검색
+	console.log(arr[1].getAttribute("value"));//element 검색
+}
+
+function func(para){
+	let ele= document.createElement("i");//<i>태그생성
+	let itext= document.createTextNode(para);//안녕넣기
+	ele.appendChild(itext);//i태그의 자식으로 안녕을 넣어주는것.
+	//최종적으로 이탤릭체의 안녕을 출력하게 된다.
+	
+	document.getElementById("show").appendChild(ele);// show에 보여주기
+	//append했기에 안녕이 눌러줄때마다 출력이 쌓인다.
+}
+
+function clefunc(){
+	let target= document.getElementById("show");
+	//target.removeChild(target.lastChild);//뒤에서부터하나씩
+	//target.removeChild(target.firstChild);//앞에서부터하나씩
+	
+	while(target.hasChildNodes()){
+		target.removeChild(target.childNodes[0]);
+	}
+	
+}
+
+</script>
+</head>
+<body>
+<h1>Dom Test</h1>
+<!-- 
+구조화된 문서(ML, tree 구조)에 접근하여 요소 및 속성 또는 텍스트를
+참조, 수정, 삭제, 추가 할 수 있는 기술
+요소와 속성
+ -->
+<h2 id="my" comments="이건 속성">Dom 객체 참조</h2>
+<input type="button" value="id 검색" onclick="abc()"><br>
+<input type="button" value="element 검색" onclick="def()"><br>
+<hr>
+<h1>요소 생성 및 삭제</h1>
+<button onclick="func('안녕')">요소생성1</button>
+<button onclick="func('반가워')">요소생성2</button>
+<button onclick="clefunc()">요소생성3</button>
+<br>
+<div id="show"></div>
+
+
+
+
+</body>
+</html>

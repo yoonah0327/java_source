@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>동기비동기2</title>
+</head>
+<body>
+<h2>비동기 처리용 Promise 객체</h2>
+주로 웹서버에서 받아온 자료를 클라이언트에서 비동기적으로 처리하고자 할때 사용.
+<script type="text/javascript">
+/*
+//콜백지옥: js를 이용한 비동기프로그래밍시 발생하는문제.
+function myProcess(){ //비동기처리를하는데, 비동기안에 여러개의 비동기처리를 하면 아래와같은 코드가 된다.이게 콜백지옥.
+setTimeout(() => { //코드를 읽기 어려움. 가독성이떨어짐.
+	console.log('콜백1 완료');
+	
+	setTimeout(() => {
+		console.log('콜백2 완료');
+		
+		setTimeout(() => {
+			console.log('콜백3 완료');
+		}, 2000)
+	}, 2000)
+}, 2000);	
+}
+
+myProcess();
+console.log('끝');
+// 끝 콜백1완료 콜백2완료 콜백3완료
+*/
+
+//Promise 객체 등장. promise객체가 만들어지면 내부적으로 executor가 자동실행됨.
+//new Promise에는 resolve와 reject를 인수로 갖는 함수가 전달되는데 이를 executor(실행자, 실행함수)라 한다.
+//resolve(value)- 일이 성공적으로 끝난경우 그 결과를 나타내는 value와 함께 호출
+//reject(error)- 에러 발생시 에러객체를 나타내는 error와 함께 호출 
+//pending. fulfilled. rejected.
+//new Promise(executor)일 때 state는 "pending", result는 undefined가 된다.
+//비동기 처리가 되면 매개변수 resolve("메세지")는 then 메소드로 전달되며
+//이 때 state는 "fulfilled", result는 "메세지"가 된다.
+/* 실습1 ------------------
+const myPromise = new Promise((resolve, reject) => {
+	setTimeout(() => {
+		resolve('이 값이 then메소드의 매개변수로전달됨');
+	}, 2000);
+});
+myPromise.then((res) => {
+	console.log('then메소드 처리------');
+	console.log(res);
+});
+*/
+
+//실습2----------------------------
+const myPromise = (seconds) => new Promise((resolve, reject)=> {
+	setTimeout(() => {
+		let a =3;
+		if(a%2===0){
+			resolve('이 값이 then메소드의 매개변수로전달됨')
+		}else{
+			reject('에러처리: reject이 실행되면 catch로 받을수있다');
+		}
+		resolve('이 값이 then메소드의 매개변수로전달됨');
+	}, seconds);
+});
+
+myPromise(2000) //위와 비교했을때(주석처리된부분) 일관성있게 표현되기에 가독성이 좋다.
+.then((res) => {
+	console.log('then메소드 처리1 -----');
+	console.log(res);
+	
+	return myPromise(2000); //다음번 then메소드 호출됨
+}).then((res) => {
+		console.log('then메소드 처리2 -----');
+		console.log(res);// 계속 chaining할 수있다.
+	return myPromise(2000);//다음번 then메소드 호출됨
+}).then((res) => {
+	console.log('then메소드 처리3 -----');
+	console.log(res);
+	return myPromise(2000);//다음번 then메소드 호출됨
+}).catch((res) => {
+	console.log(res);
+	// a=2: 리설브만나고 댄만나서 계속수행함
+	//a=3: 리젝만나고, 캐치만남
+}); //finally 적을 수도 있다. 
+
+//promise로 사용자로그인, 보안설정, 출력 등 다양한 응용이 가능.
+
+</script>
+
+</body>
+</html>
