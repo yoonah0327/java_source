@@ -4,25 +4,25 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script type="text/javascript">
-function gugu() {
-	let arr=document.getElementById("seldon");
-	let su=arr.options[arr.selectedIndex].value;
+function gugu() { // 구구단 출력 
+	let arr=document.getElementById("seldon"); //선택한 것 배열로
+	let su=arr.options[arr.selectedIndex].value; //배열에 value값 받기
 	
-	let tr = document.createElement("tr");
+	let tr = document.createElement("tr");//테이블 만들기
 	for (let i = 1; i <= 9; i++) {
 		let td = document.createElement("td");
 		let gu=document.createTextNode(su + "*" + i + "=" + su * i + " | ");
-		tr.appendChild(td);	
-		td.appendChild(gu);
+		tr.appendChild(td);	// tr에 td 넣기
+		td.appendChild(gu); // td에 gu 넣기
 	}
 
-	document.getElementById("myTbody").appendChild(tr);
+	document.getElementById("myTbody").appendChild(tr); //myT
 }
 
-function delfunc() {
+function delfunc() { // 삭제버튼
 	let aa = document.getElementById("myTbody")
 	
-	while(aa.hasChildNodes()){
+	while(aa.hasChildNodes()){ // 지우기
 		aa.removeChild(aa.childNodes[0]);
 	}
 }

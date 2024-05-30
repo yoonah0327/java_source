@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>JQuery</title>
+<style type="text/css">
+.korea{
+font-size:30px;
+font-style:italic;
+}
+</style>
+<!--
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  --> <!-- 매번 버젼이 업데이트되므로, 가장 최신버젼을 받아온다 -->
+<script src="https://code.jquery.com/jquery-latest.js"></script> 
+<script type="text/javascript">
+// $():Factory함수. 문서를 객체화 한다.
+//window.onload = function(){}; //자바스크립트에서의 형태
+
+/*
+window.onload = function(){console.log("window onload 1");}
+$(document).ready(function(){console.log("document ready 1")});
+*/
+	
+//$(document).ready(function(){ //jquery에서의 형태. window.onload보다 빨라서 이걸 많이 사용.
+jQuery(document).ready(function(){ //$가 충돌이 일어날 가능성이 있을땐 jQuery이렇게 쓴다.
+	//alert("ok"); 
+	
+	//body태그 내 요소, 속성, 값 선택 
+	$("p").css("border", "1px solid #ff0000"); //요소 선택
+	$(".my").css("border", "1px dotted cyan"); //클래스 선택 
+	jQuery("div div#content").css("background-color", "yellow") //id 선택
+	$("span > i").css("color", "salmon").css("font-size", "28px"); //method chain
+});
+	//$(document).ready(function(){});
+$(function(){ //위와 동일
+	$("strong#kor").css("color", "orange").addClass("korea"); // method chain
+
+});
+
+$(document).ready(function(){
+	$("div > a[target]").css("background-color", "seagreen");
+	$("div > a[href!='https://korea.com']").css("font-size", "24px");
+	
+	$("div[id^='mb']").css("background-color", "yellowgreen"); //정규표현식.id mb로 시작된다는뜻
+	$("div[id$='s']").css("background-color", "silver"); //정규표현식 id속성값이 s로 끝나는
+
+	$("a[href*='daum']").css("color", "brown").css("font-size", "40px");
+	//href 속성값에 daum 문자열이 포함된 
+});
+
+$(document).ready(function(){
+	//실행 중에 요소 추가
+
+	//$('b'): document.getElementsByTagName('b')과 같은 뜻
+	//$('b').prepend('<h2>요소 추가(기존 요소 앞)</h2>'); //prepend쓰니까 b태그 앞부분에 적힌다.
+	$('<h2>요소 추가(기존 요소 앞)</h2>').prependTo('b'); //상동
+	
+	//$('b').append('<h4>요소 추가(기존 요소 뒤)</h4>');
+	$('<h6>요소 추가(기존 요소 뒤)</h6>').prependTo('b');
+	
+	//요소 수 만큼 반복 처리----------
+	let ss ="";
+	$('li').each(function(){
+		ss += $(this).text()+", ";
+		//ss += $(this).html()+", "; //this: 현재 반복대상 요소. innerHTML
+	}); //값을 얻고 
+	$("#show").text(ss);
+	//$("#show").html(ss); //값을 줌// html로 하면 윈도우 부분이 이탤릭됨 
+});
+
+
+</script>
+
+</head>
+<body>
+<h2>jQuery 셀렉터 연습</h2>
+<p class="my">초여름의 시작</p>
+<p>더위를 이길 체력 충전</p>
+<div>
+<div id="content">5월의 마지막 주</div>
+</div>
+<span><i>바람이 부는 오후</i></span>
+<span>공기는 맑음</span>
+<br>
+<strong id="kor">대한민국</strong>
+<hr>
+<div>
+	<a href="https://naver.com">naver target:X</a><br>
+	<a href="https://naver.com" target="_blank">naver target:0</a><br>
+	<a href="https://korea.com">korea target:X</a><br>
+	<a href="https://korea.com" target="_blank">korea target:0</a><br>
+</div>
+<br>
+<div id="mbc">
+	<a href="https://daum.net">daum target:X</a><br>
+	<a href="https://daum.net" target="_blank">daum target:0</a><br>
+</div>
+<hr>
+<b>문서에 실행 도중 요소 추가</b>
+<hr>
+운영체 종류<br>
+<ul>
+<li><i>윈도우</i></li>
+<li>맥os</li>
+<li>리눅스</li>
+</ul>
+<div id="show"></div>
+</body>
+</html>

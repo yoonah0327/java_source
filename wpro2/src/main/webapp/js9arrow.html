@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <title>화살표 함수 </title>
 <script type="text/javascript">
+
+
 const sum1= function(a,b) {
 	return a+b;
 }
@@ -51,6 +53,21 @@ function func(...para) { //구조분해연산자
 	
 	(para.forEach((obj)=> console.log(obj))); //콜백에서 화살표함수써봄 //a b c d가 차례로 찍힌다
 }
+
+function sumDigits(number){
+	let sum=0;
+	let arr= String(number).split("");
+	arr.forEach((i) => {
+		sum += parseInt(i);
+	});
+	return sum;
+}
+
+
+
+
+
+
 
 func('a','b','c','d');
 

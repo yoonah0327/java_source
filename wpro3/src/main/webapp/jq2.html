@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+.focusOk{
+background-color: beige;
+}
+</style>
+<script src="https://code.jquery.com/jquery-latest.js"></script> 
+<script type="text/javascript">
+$(document).ready(function(){
+$('h1').css({'color':'pink', 'text-decoration':'underline'});
+//앞에선 method chain형태였는데, {}와:이용해 키밸류형식으로도 가능하다.
+$('h1').wrap('<i>'); //감싸기 <i><h1>이벤트기본이해</h1></i>
+	
+	//이벤트
+	$('input').focus(function(){ //onfocus:포커스얻으면
+		$(this).addClass('focusOk');
+	});
+	$('input').blur(function(){ //onblur:포커스잃으면
+		$(this).removeClass('focusOk');
+	});
+	
+	$('#btnOk').click(function(event){
+		event.preventDefault(); //button말고 submit일때, 그 기능 해제시킴.
+		
+		$('#txtData').animate({
+			width:'200px', height:'50px'	
+		},1000);
+	});
+	
+	//$('a').click(function(e){
+	$('a').on('click', function(e){	//상동
+		e.preventDefault();
+		//$('#txtData').value('a 태그로 다음 작업');
+		console.log('a 태그로 다음 작업');
+	});
+	
+	$("#kbs").on("click", function(){
+		console.log($("#kbs").html());
+	
+	});
+	
+	$("#mbc").bind("click", function(){ //이벤트 연결 후 해제 가능. addeventlistener라고 생각하면됨.
+		console.log($("#mbc").html());
+		
+		$("#mbc").unbind("click"); //이벤트해제
+	});
+	
+});
+
+</script>
+</head>
+<body>
+<h1>이벤트 기본 이해</h1>
+<form>
+<label for="txtData">자료입력: </label>
+<input type="text" id="txtData"> <!-- 이렇게 되면 label은 txtData를 위해 존재. 둘은 한쌍. -->
+<input type="submit" id="btnOk" value="확인버튼">
+</form>
+<br><br>
+<a href="https://www.naver.com">네이버</a>
+<br>
+<span id="kbs">대한민국 방송</span>
+<div id="mbc">만나면 좋은 친구</div>
+
+</body>
+</html>

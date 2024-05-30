@@ -74,16 +74,15 @@ class WooriBank{ // 계좌가 있는 상태에서 입출금처리 클래스
 		return new BankAccount(owner, balance);
 	}
 }
-	
 }
 // 고객이 은행을 방문해서 실행
-const cjy = WooriBank.createAccount('최지연', 'savings', 10000);
+const cjy = WooriBank.createAccount('김호랑', 'savings', 10000);
 console.log(cjy.toString());
 cjy.deposit(50000);
 cjy.withdraw(20000);
 console.log(cjy.toString());
 console.log('---------------');
-const ksh = WooriBank.createAccount('김성하', 'checking', 20000);
+const ksh = WooriBank.createAccount('김사자', 'checking', 20000);
 ksh.deposit(50000);
 ksh.withdraw(20000);
 console.log(ksh.toString());
