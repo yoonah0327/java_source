@@ -23,4 +23,11 @@
   <url-pattern>/dajung</url-pattern>
   </servlet-mapping> 
   -->
+   <!-- 프로젝트전체에 적용하는경우 -->
+   <!--  
+  <session-config>
+  <session-timeout>60</session-timeout> 
+  </session-config> 
+  -->
+  
 </web-app>

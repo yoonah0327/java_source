@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload = function(){
+	let btnOk= document.querySelector("#btnOk");
+	btnOk.addEventListener("click", func);
+}
+
+function func(){
+	if(frm.bunho.value==="" || frm.name.value==="" || frm.kor.value==="" || frm.eng.value===""){
+		alert("빈칸을 채우시오");
+		return;
+	}
+	frm.submit();
+}
+
+</script>
+
+</head>
+<body>
+<h2> 성적 입력 </h2>
+<form action="ServletExam" method="get" name="frm">
+번호: <input type="text" name="bunho" size= "5"><br>
+이름: <input type="text" name="name" size= "5"><br>
+국어: <input type="text" name="kor" size= "5"><br>
+영어: <input type="text" name="eng" size= "5"><br>
+<br>
+<input type="button" id="btnOk" value="등록">
+</body>
+</html>

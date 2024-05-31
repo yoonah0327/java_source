@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+window.onload=() => {
+	document.querySelector("#btnOk").onclick = function() {
+		frm.submit();
+	}
+}
+</script>
+</head>
+<body>
+<table>
+	<tr>
+		<td>
+	<img src="images/apple.jpg" width="80%">
+		</td>
+	<td>
+<pre>
+맛뜨레 빨간사과 소과 5~6입, 1kg, 1개
+원산지: 컨텐츠 참조
+3,761개 상품평
+와우할인가 10,880원 (100g당 1,088원) | 로켓와우 전용	
+무료배송 (로켓프레시 상품 15,000원 이상 구매 시) 
+내일(토) 6/1 새벽 7시 전 도착 보장 (밤 12시 전 주문 시 / 서울⋅경기 기준) 
+</pre>	
+	</td>
+	</tr>
+	<tr>
+	<td colspan="2">
+	<form action="Cart" name="frm" method="post">
+	<input type="hidden" name="name" value="맛뜨레 빨간사과">
+	<input type="hidden" name="price" value="10880"> <!--,찍지말기. 문자열로넘어가므로! -->
+	<input type="button" id="btnOk" value="장바구니에 상품담기">
+	<input type="button" value="홈으로 이동" onclick="history.back()"> 
+	<!-- History.back() 메서드는 브라우저가 세션 기록의 바로 뒤 페이지로 이동하도록 지시합니다. history.go(-1)와 동일. 이전 페이지가 없는 경우 아무것도 하지 않습니다. -->
+	</form>
+	</td>
+	</tr>
+</table>
+</body>
+</html>
