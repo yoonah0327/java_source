@@ -4,15 +4,32 @@
     pageEncoding="UTF-8"%>
 <jsp:useBean id="boardMgr" class="pack.board.BoardMgr"/>
 <jsp:useBean id="dto" class="pack.board.BoardDto"/>
+
+<%
+int spage =1, pageSu=0;
+int star, end; // 페이지블럭 https://cafe.daum.net/flowlife/HqLp/13 코드참조
+
+
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>게시판</title>
 <link rel="stylesheet" type="text/css" href="../css/board.css">
-<script type="text/javascript"></script>
-
-
+<script type="text/javascript">
+window.onload = () => {
+	document.querySelector("#btnSearch").onclick = function(){
+		if(frm.sword.value === ""){
+			frm.sword.focus();
+			frm.sword.placeholder = "검색어를 입력하세요";
+			return;
+		}
+		frm.submit();
+	}
+}
+</script>
 </head>
 <body>
 <table>
@@ -28,14 +45,32 @@
 	<th>번호</th><th>제  목</th><th>작성자</th><th>작성일</th><th>조회수</th>
 	</tr>
 	<%
-	ArrayList<BoardDto> list = boardMgr.getDataAll();
+	try{
+		spage= Integer.parseInt(request.getParameter("page"));
+	}catch(Exception e){
+		spage=1;
+	}
+	if(spage<=0) spage=1;
+	
+	//검색일 경우=====
+	String stype= request.getParameter("stype");
+	String sword= request.getParameter("sword");
+	// ========
+	
+	boardMgr.totalList(); //전체레코드수 계산
+	pageSu = boardMgr.getPageSu(); //전체페이지수 얻기
+	
+	//ArrayList<BoardDto> list = boardMgr.getDataAll(spage); //페이징처리만
+	ArrayList<BoardDto> list = boardMgr.getDataAll(spage, stype, sword); //페이징처리랑 검색처리
 	
 	for(int i=0; i<list.size(); i++){
 		dto= (BoardDto)list.get(i);
 	%>	
 	<tr>
 	<td><%=dto.getNum() %></td>
-	<td><%=dto.getTitle() %></td>
+	<td>
+	<a href="boardcontent.jsp?num=<%=dto.getNum() %>&page=<%=spage %>"><%=dto.getTitle() %></a> 
+	</td> <!-- 해당 게시글이 있던 페이지로 돌아와야하기에, 해당 페이지값도 같이 가지고간다 -->
 	<td><%=dto.getName() %></td>
 	<td><%=dto.getBdate() %></td>
 	<td><%=dto.getReadcnt() %></td>
@@ -46,8 +81,39 @@
 	<%
 	}
 	%>
-	
 	</table>
+	<br>
+	<table style="width: 100%">
+	<tr>
+	<td style="text-align: center;">
+	<%
+	for(int i=1; i < pageSu; i++){
+		if(i==spage){
+			out.print("<b style='font-size:12pt;color:red'>[" +i + "]</b>");
+		}else{
+			out.print("<a href='boardlist.jsp?page=" +i + "'>[" +i + "]</a>");
+			
+		}
+		
+	}
+	%>
+		
+	<br><br>
+	<form action="boardlist.jsp" name="frm" method="get">
+		<select name="stype">
+		<option value="title" selected="selected">글제목</option>
+		<option value="name">작성자</option>
+		</select>
+		<input type="text" name="sword">
+		<input type="button" value="검색" id="btnSearch">
+	</form>
+	</td>
+	</tr>
+	</table>
+	
+	
+	
+	
 	</td>
 	</tr>
 </table>
