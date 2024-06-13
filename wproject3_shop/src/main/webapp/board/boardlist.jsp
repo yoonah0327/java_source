@@ -35,7 +35,7 @@ window.onload = () => { // 글제목, 작성자를 찾는 검색버튼 함수
 <table> <!-- 상단의 메뉴 테이블 -->
 	<tr>
 	<td>
-	<a href="../index.html">메인으로</a>&nbsp;
+	<a href="../guest/guest_index.jsp">메인으로</a>&nbsp;
 	<a href="boardlist.jsp?page=1">최근목록</a>&nbsp;
 	<!-- 가장 최근목록을 보여주어야하기에 페이지쪽수까지 지정.-->
 	<a href="boardwrite.jsp">새글작성</a>&nbsp;

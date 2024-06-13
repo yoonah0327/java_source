@@ -8,8 +8,8 @@
 String num = request.getParameter("num");
 String spage = request.getParameter("page");
 dto = boardMgr.getReplyData(num);
-// getData에 gnum onum이 없어서 따로 또 만들어준다.처음만들때 싹 만들고 덜 읽어오는 방법으로 해줘도된다.
-
+// getData에 gnum onum이 없어서 따로 또 만들어준다.
+//처음만들때 싹 만들고 덜 읽어오는 방법으로 해줘도된다.
 %>
 <!DOCTYPE html>
 <html>
