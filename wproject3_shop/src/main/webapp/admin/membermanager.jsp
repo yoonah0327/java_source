@@ -33,6 +33,7 @@
   	<td style="text-align: left;"><%=m.getEmail() %></td>
   	<td><%=m.getPhone() %></td>
   	<td><a href="javascript:memUpdate('<%=m.getId()%>')">수정하기</a></td>
+  	<!-- 하단에 hidden. menUpdate함수로 uk인 id 들고 가게 함. -->
   </tr>
   <%	  
   }
@@ -42,7 +43,7 @@
 <%@ include file="admin_bottom.jsp" %>
 
 <form action="memberupdate_admin.jsp" name="updateFrm" method="post">
-<input type="hidden" name="id">
+<input type="hidden" name="id"><!-- 특정지을수잇는+중복안되는 id 들고 수정할수 잇게 함. -->
 </form>
 </body>
 </html>

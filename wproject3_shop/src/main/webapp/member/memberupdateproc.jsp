@@ -8,7 +8,8 @@
 <jsp:useBean id="memberMgr" class="pack.member.MemberMgr" />
 
 <%
-String id = (String)session.getAttribute("idKey");
+String id = (String)session.getAttribute("idKey");//세션에 담아두기에 들고다닐필요없다.
+//다양한 방법을 시도해보자. 결과가 나와도 방법1,2,3.. 
 boolean b = memberMgr.memberUpdate(memberBean, id); 
 
 if(b){

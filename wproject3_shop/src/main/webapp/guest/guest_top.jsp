@@ -5,14 +5,14 @@ String memid= (String)session.getAttribute("idKey");
 String log="";
 if(memid == null){//로그인안한경우
 	log = "<a href='../member/login.jsp'>로그인</a>";
-}else{
+}else{//로그인성공
 	log = "<a href='../member/logout.jsp'>로그아웃</a>";
 }
 
 String mem="";
 if(memid == null){//로그인안한경우
 	mem = "<a href='../member/register.jsp'>회원가입</a>";
-}else{
+}else{//로그인성공
 	mem = "<a href='../member/memberupdate.jsp'>회원수정</a>";
 }
 %>
