@@ -51,8 +51,13 @@
 </table>
 <%@ include file="admin_bottom.jsp" %> 
 
+
 <form action="productdetail.jsp" name="detailForm" method="get">
 <input type="hidden" name="no">
+
+
+
+
 </form>
 </body>
 </html>

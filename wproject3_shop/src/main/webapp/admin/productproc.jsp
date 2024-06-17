@@ -11,9 +11,9 @@ boolean result = false;
 if(flag.equals("insert")){
 	result = productMgr.insertProduct(request); //클라이언트가 넘겨준 정보를 받는다.
 }else if(flag.equals("update")){
-	//result = productMgr.updateProduct(request); //클라이언트가 넘겨준 정보를 받는다.
+	result = productMgr.updateProduct(request); //클라이언트가 넘겨준 정보를 받는다.
 }else if(flag.equals("delete")){
-	//result = productMgr.deleteProduct(request); //클라이언트가 넘겨준 정보를 받는다.
+	result = productMgr.deleteProduct(request.getParameter("no")); //클라이언트가 넘겨준 정보를 받는다.
 }else{
 	response.sendRedirect("productmanager.jsp");
 }
