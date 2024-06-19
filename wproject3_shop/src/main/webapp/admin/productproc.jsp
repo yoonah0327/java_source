@@ -8,7 +8,7 @@ request.setCharacterEncoding("utf-8");
 String flag= request.getParameter("flag");
 boolean result = false;
 
-if(flag.equals("insert")){
+if(flag.equals("insert")){ //여기서mgr 컨트롤 
 	result = productMgr.insertProduct(request); //클라이언트가 넘겨준 정보를 받는다.
 }else if(flag.equals("update")){
 	result = productMgr.updateProduct(request); //클라이언트가 넘겨준 정보를 받는다.

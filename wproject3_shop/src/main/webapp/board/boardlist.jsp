@@ -64,6 +64,7 @@ window.onload = () => { // 글제목, 작성자를 찾는 검색버튼 함수
 	//ArrayList<BoardDto> list = boardMgr.getDataAll(spage); //페이징처리만
 	ArrayList<BoardDto> list = boardMgr.getDataAll(spage, stype, sword); //페이징처리랑 검색처리
 	
+	
 	for(int i=0; i<list.size(); i++){
 		dto= (BoardDto)list.get(i);
 		
@@ -87,6 +88,7 @@ window.onload = () => { // 글제목, 작성자를 찾는 검색버튼 함수
 	</tr>
 	<%
 	}
+
 	%>
 	</table>
 	<br>

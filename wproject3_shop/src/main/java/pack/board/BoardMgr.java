@@ -89,6 +89,7 @@ public class BoardMgr {
 			conn=ds.getConnection();
 			pstmt= conn.prepareStatement(sql);
 			rs= pstmt.executeQuery();
+			
 			if(rs.next()) num = rs.getInt(1);
 		} catch (Exception e) {
 			System.out.println("currentMaxNum err: "+e);
@@ -125,7 +126,7 @@ public class BoardMgr {
 			pstmt.executeUpdate();
 			
 		} catch (Exception e) {
-			System.out.println("currentMaxNum err: "+e);
+			System.out.println("saveData err: "+e);
 		}finally {
 			try {
 				if(rs != null) rs.close();

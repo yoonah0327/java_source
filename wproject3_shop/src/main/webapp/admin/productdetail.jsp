@@ -41,8 +41,6 @@ ProductDto dto = productMgr.getProduct(no);
 			<td>재고량: </td><td><%=dto.getStock() %></td>
 			</tr>
 		</table>
-	
-	
 	</td>
 	<td style="width=30%">
 	<b>* 상품 설명 *</b>
