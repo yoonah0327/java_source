@@ -18,7 +18,7 @@ function check(){
 </script>
 </head>
 <body>
-<form action="replyproc.jsp?flag=insert"  name="frm" method="post" enctype="multipart/form-data">
+<form name="frm" method="post" action="replysave.jsp" enctype="multipart/form-data">
 <h2>리뷰 작성하기</h2>
 책 평점주기
 <div class ="star_rating">

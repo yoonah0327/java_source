@@ -13,6 +13,10 @@ import javax.sql.DataSource;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import pack.reply.ReplyBean;
+import pack.reply.ReplyDto;
+
+
 public class ReplyMgr {
 	private Connection conn;
 	private PreparedStatement pstmt;
@@ -179,7 +183,154 @@ public class ReplyMgr {
 			}
 		}
 	}
-	//ReplyDto dto = ReplyDto.getReply_no(reply_no);
+	
+	//replyMgr.replyLikecnt(reply_no);
+	public void replyLikecnt(String reply_no) { // 좋아요수 // 좋아요 조건을 어떻게 줘야할지?
+		String sql= "update board set reply_like_cnt = reply_like_cnt +1";
+		
+		try {
+			conn=ds.getConnection();
+			pstmt= conn.prepareStatement(sql);
+			//pstmt.setString(1, );
+			pstmt.executeUpdate(); // 0 - 1
+			
+		} catch (Exception e) {
+			System.out.println("updateReadcnt err: "+e);
+		}finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (Exception e2) {
+				
+			}
+		}
+		
+	}
+	
+	//dto = ReplyMgr.getData(reply_no);
+	public ReplyDto getData(String reply_no){
+		String sql = "select * from reply where reply_no=?";
+		ReplyDto dto = null;
+		
+		try {
+			conn=ds.getConnection();
+			pstmt= conn.prepareStatement(sql);
+			pstmt.setString(1, reply_no);
+			rs= pstmt.executeQuery(); 
+			
+			//글을 눌러서 보도록유도. url접근 막기. 
+			if(rs.next()) { //포인터이동시켜 자료있을경우 자료보여주기.
+				dto = new ReplyDto();
+				dto.setReply_id(rs.getString("reply_id"));
+				dto.setReply_create_date(rs.getString("reply_create_date"));
+				dto.setReply_like_cnt(rs.getInt("reply_like_cnt"));
+				dto.setReply_title(rs.getString("reply_title"));
+				dto.setReply_image(rs.getString("reply_image"));
+				dto.setReply_cont(rs.getString("reply_cont"));
+				
+			}
+			
+		} catch (Exception e) {
+			System.out.println("getData err: "+e);
+		}finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (Exception e2) {
+				
+			}
+		}
+		return dto;
+	}
+//dto = replyMgr.getReplyData(reply_no);
+	public ReplyDto getCommentData(String reply_no) {
+		String sql = "select * from reply where reply_no=?";
+		ReplyDto dto = null;
+		
+		try {
+			conn=ds.getConnection();
+			pstmt= conn.prepareStatement(sql);
+			pstmt.setString(1, reply_no);
+			rs= pstmt.executeQuery(); 
+			
+		 
+			if(rs.next()) { 
+				dto =new ReplyDto();
+				dto.setReply_title(rs.getString("reply_title"));
+				dto.setReply_gnum(rs.getInt("reply_gnum"));
+				dto.setReply_onum(rs.getInt("reply_onum"));
+			}
+	
+			
+		} catch (Exception e) {
+			System.out.println("getCommentData err: "+e);
+		}finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (Exception e2) {
+				
+			}
+		}
+		
+		return dto;
+		
+	}
+	
+	//replyMgr.saveEdit(bean);
+	public void saveEdit(ReplyBean bean) {
+		String sql="update reply set reply_point=?, reply_title=?, reply_cont=? where reply_no=?";
+		
+		try {
+			conn= ds.getConnection();
+			pstmt= conn.prepareStatement(sql);
+			pstmt.setInt(1, bean.getReply_point());
+			pstmt.setString(2, bean.getReply_title());
+			pstmt.setString(3, bean.getReply_cont());
+			pstmt.setInt(4, bean.getReply_no());
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("saveEdit err: "+e);
+		}finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (Exception e2) {
+				
+			}
+		}
+		
+		
+	}
+	
+	//ReplyMgr.delData(reply_no);
+	public void delData(String reply_no) {
+		String sql= "delete from reply where reply_no=?";
+		try {
+			conn= ds.getConnection();
+			pstmt= conn.prepareStatement(sql);
+			pstmt.setString(1, reply_no);
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println("delData err: "+e);
+		}finally {
+			try {
+				if(rs != null) rs.close();
+				if(pstmt != null) pstmt.close();
+				if(conn != null) conn.close();
+			} catch (Exception e2) {
+				
+			}
+		}
+	}
+	
+	
 	
 
 	

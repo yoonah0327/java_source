@@ -1,4 +1,3 @@
-<%@page import="javax.servlet.jsp.tagext.TryCatchFinally"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="pack.reply.ReplyDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -51,21 +50,25 @@ ArrayList<ReplyDto> list = replyMgr.getDataAll(bno);
 
 for(int i=0; i<list.size(); i++){
 	dto= (ReplyDto)list.get(i);
+
 	
-%>	
-<tr style="text-align: center;">
-<td><%=dto.getReply_no()%></td>
-<td><!-- ?reply_no=<%=dto.getReply_no()%>&reply_book_no=<%=dto.getReply_book_no()%> -->
-<a href="replydetails.jsp">
-			<%=dto.getReply_title() %></a>
-</td> 
-<td><%=dto.getReply_id() %></td>
-<td><%=dto.getReply_create_date() %></td>
-<td><%=dto.getReply_like_cnt() %></td>
-</tr>
-<%
+	
+	%>
+	<tr style="text-align: center;">
+	<td><%=dto.getReply_no() %></td>
+	<td><a href="javascript:replyDetail('<%=dto.getReply_no()%>S')">
+			<%=dto.getReply_title() %></a></td>
+			<!-- 북넘버, 리뷰번호 갖고가야한다. -->
+	<td><%=dto.getReply_id() %></td>
+	<td><%=dto.getReply_create_date() %></td>
+	<td><%=dto.getReply_like_cnt() %></td>
+	</tr>
+	<%
 }
 %>	
 </table>
+<form action="replydetails.jsp" name="detailForm" method="get">
+<input type="hidden" name="reply_no">
+</form>
 </body>
 </html>
