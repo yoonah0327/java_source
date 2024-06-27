@@ -18,7 +18,8 @@ public class ProcessDao implements Processinter{
 		List<DataDto> list = null;
 		
 		try {
-			list = sqlSession.selectList("selectDataAll");
+			SqlMapperinter inter = (SqlMapperinter)sqlSession.getMapper(SqlMapperinter.class);
+			list = inter.selectDataAll();
 		} catch (Exception e) {
 			System.out.println("selectDataAll err: "+e);
 		}finally {
@@ -32,7 +33,8 @@ public class ProcessDao implements Processinter{
 		DataDto dto = null;
 		
 		try {
-			dto = sqlSession.selectOne("selectPart", id);
+			SqlMapperinter inter = (SqlMapperinter)sqlSession.getMapper(SqlMapperinter.class);
+			dto = inter.selectDataPart(id);
 		} catch (Exception e) {
 			System.out.println("selectPart err: "+e);
 		}finally {
@@ -46,7 +48,8 @@ public class ProcessDao implements Processinter{
 		SqlSession sqlSession = factory.openSession();
 		
 		try {
-			if(sqlSession.insert("insertData", form) > 0) b=true;
+			SqlMapperinter inter = (SqlMapperinter)sqlSession.getMapper(SqlMapperinter.class);
+			if(inter.insertData(form) >0) b=true;
 			sqlSession.commit();
 		} catch (Exception e) {
 			System.out.println("insertData err: "+e);
@@ -62,12 +65,13 @@ public class ProcessDao implements Processinter{
 		SqlSession sqlSession = factory.openSession();
 		
 		try {
-			// 비밀번호 비교 후 수정 여부 판단
-			DataDto dto = selectPart(form.getId());
+			SqlMapperinter inter = (SqlMapperinter)sqlSession.getMapper(SqlMapperinter.class);
 			
+			// 비밀번호 비교후 수정여부판단
+			DataDto dto = inter.selectDataPart(form.getId());
 			if(dto.getPasswd().equals(form.getPasswd())) {//디비비번 =? 클라이언트가입력한비번 
 				//수정처리
-				if(sqlSession.update("updateData", form) > 0) {
+				if(inter.updateData(form) > 0) {
 					b = true;
 					sqlSession.commit();
 				}
@@ -87,7 +91,9 @@ public class ProcessDao implements Processinter{
 		SqlSession sqlSession = factory.openSession();
 		
 		try {
-			int cou = sqlSession.delete("deleteData", id);
+			SqlMapperinter inter = (SqlMapperinter)sqlSession.getMapper(SqlMapperinter.class);
+			
+			int cou = inter.deleteData(id);
 			if(cou >0 ) b = true;
 			sqlSession.commit();
 		} catch (Exception e) {
