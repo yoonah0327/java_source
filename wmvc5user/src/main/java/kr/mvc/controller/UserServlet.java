@@ -62,9 +62,9 @@ public class UserServlet extends HttpServlet {
 		}else if(command.equals("updateform")) {
 			controller = new UpdateFormController();
 		}else if(command.equals("update")) {
-			//controller = new UpdateController();
+			controller = new UpdateController();
 		}else if(command.equals("delete")) {
-			//controller = new DeleteController();
+			controller = new DeleteController();
 		}
 		
 		return controller; //로그인컨트롤러주소 반환. 리스트컨트롤러주소반환. 

@@ -15,7 +15,7 @@ public class UserDaoModel {
 	public UserDaoModel() {
 		// TODO Auto-generated constructor stub
 	}
-	
+	// 하나의 자료 읽기
 	public UserDto findUser(String userid) {
 		UserDto dto = null;
 		
@@ -31,7 +31,7 @@ public class UserDaoModel {
 		}
 		return dto;
 	}
-	
+	// 전체 자료 읽기
 	public ArrayList<UserDto> getUserDataAll(){
 		List<UserDto> list = null;
 		SqlSession session = factory.openSession();
@@ -47,7 +47,7 @@ public class UserDaoModel {
 		
 		return (ArrayList<UserDto>)list;
 	}
-	
+	// insert 데이터 추가
 	public int insertData(UserForm userForm) {
 		int result =0;
 		SqlSession session = factory.openSession();
@@ -63,6 +63,43 @@ public class UserDaoModel {
 		}
 		
 		return result;
+	}
+	// update 데이터 수정
+	public int updateData(UserForm userForm) {
+		int result = 0;
+			
+		SqlSession session = factory.openSession();
+			
+		try {
+			result = session.update("updateData", userForm);
+			session.commit();
+		} catch (Exception e) {
+			System.out.println("updateData err : " + e);
+			session.rollback();
+		} finally {
+			session.close();
+		}
+			
+		return result;  // 0 or 1
+	}
+	
+	// delete 데이터 삭제
+	public int deleteData(String userid) {
+		int result = 0;
+			
+		SqlSession session = factory.openSession();
+			
+		try {
+			result = session.delete("deleteData", userid);
+			session.commit();
+		} catch (Exception e) {
+			System.out.println("deleteData err : " + e);
+			session.rollback();
+		} finally {
+			session.close();
+		}
+			
+		return result;  // 0 or 1
 	}
 	
 	
